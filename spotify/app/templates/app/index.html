@@ -1,0 +1,110 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block navbar %}
+    {% include "app/navbar.html" %}
+{% endblock %}
+
+
+
+{% block content %}
+
+    <section class="AddSongAndArtist">
+        <div class="overlay">
+            <div class="popupmodal">
+                This is the modal. You can put whatever you like in here.
+            </div>
+        </div>
+    </section>
+
+<!-- song section -->
+<!-- song section -->
+<!-- song section -->
+
+    <section class="songsection">
+        <div class="container-m">
+            <div class="heading my-4">
+                <div class="row">
+                    <div class="column song">
+                        <span class="topsongs">top 10 songs</span>
+                    </div>
+                    <div class="column add ml-auto">
+                        <button type="button" class="btn btn-dark" onclick="$('.overlay').show();">+ Add Song</button>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table align-middle artist_table">
+                    <thead>
+                        <tr class="table-success">
+                             <th scope="col">Artwork</th>
+                            <th scope="col">Song</th>
+                            <th scope="col">Date of Release</th> 
+                            <th scope="col">Artists</th> 
+                            <th scope="col">Rate</th> 
+                         </tr>
+                    </thead>
+                    <tbody>
+                        {% for song in songs %}
+                        <tr>
+                            <td>
+                                {% if song.image %}
+                                <img src="{{ song.image.url }}" alt="" width="120px" height="120px">
+                                {% endif %}
+                            </td>
+                            
+                            <td class="align-middle">
+                                {{song.title}}
+                            </td>
+                            <td class="align-middle">
+                                {{song.date}}
+                            </td>
+                            <td class="align-middle">
+                                {% for artist in song.artists.all %}
+                                    <span>{{artist}},</span>
+                                {% endfor %}
+                            </td>
+                            <td class="align-middle">
+
+                                <div class="stars" id="rate_{{song.pk}}" data-rate_id = "{{song.pk}}" data-url="{% url 'rating' song.pk '@' %}">
+                                    {% for i in '12345'|make_list %}
+                                        {% if forloop.counter <= song.rating %}
+                                        <span class="fa fa-star fa-lg checked rate" data-id="{{forloop.counter}}"></span>
+                                        {% else %}
+                                        <span class="fa fa-star fa-lg rate" data-id="{{forloop.counter}}""></span>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </td>
+                        </tr>   
+                        {% endfor %}
+                    </tbody>
+                 </table>
+            </div>
+             
+        </div>
+       
+    </section>
+
+<!-- artist section -->
+<!-- artist section -->
+<!-- artist section -->
+
+    <section class="artistsection">
+
+    </section>
+   
+{% endblock %}
+
+
+{% block scripts %}
+     <script src="{% static 'app/js/main.js' %}"></script> 
+     <script>
+        $('.overlay').on('click', function(e) {
+            if (e.target !== this) {
+            return;
+        }
+        $('.overlay').hide();
+        });
+     </script>
+     
+{% endblock %}

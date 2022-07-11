@@ -14,7 +14,10 @@ class Artist(models.Model):
     @property 
     def artist_avg(self):
         queryset = self.song_set.all().filter(rating__gt=0).aggregate(Avg('rating'))
-        return int(queryset['rating__avg'])
+        if(queryset['rating__avg'] == None):
+            return 0
+        else:
+            return int(queryset['rating__avg'])
    
 
 
@@ -27,3 +30,6 @@ class Song(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ['-rating']
