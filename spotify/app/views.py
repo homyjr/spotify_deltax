@@ -42,9 +42,11 @@ def add_artist(request):
     if request.method == "POST":
         artist_form = ArtistForm(request.POST)
         if artist_form.is_valid():
-            artist_form.save()
-
-        return JsonResponse({}, status = 200)    
+            print("yes")
+            k = artist_form.save()
+            id = k.id
+            name = k.name
+        return JsonResponse({'id':id, 'name':name}, status = 200)    
 
     return JsonResponse({}, status=400)
 

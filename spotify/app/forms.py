@@ -20,6 +20,6 @@ class SongForm(ModelForm):
         self.fields['title'].widget.attrs.update(
             {'class': 'form-control', 'placeholder': 'Enter title...'})
         self.fields['artists'].widget.attrs.update(
-            {'class': 'form-select', 'multiple':'' ,'aria-label':'multiple select example'})
+            {'id':'artist-field-id','class': 'form-select', 'multiple':'' ,'aria-label':'multiple select example'})
 
 

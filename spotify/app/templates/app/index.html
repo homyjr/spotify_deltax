@@ -8,13 +8,7 @@
 
 {% block content %}
 
-    <section class="AddSongAndArtist">
-        <div class="overlay">
-            <div class="popupmodal">
-                This is the modal. You can put whatever you like in here.
-            </div>
-        </div>
-    </section>
+    
 
 <!-- song section -->
 <!-- song section -->
@@ -64,7 +58,6 @@
                                 {% endfor %}
                             </td>
                             <td class="align-middle">
-
                                 <div class="stars" id="rate_{{song.pk}}" data-rate_id = "{{song.pk}}" data-url="{% url 'rating' song.pk '@' %}">
                                     {% for i in '12345'|make_list %}
                                         {% if forloop.counter <= song.rating %}
