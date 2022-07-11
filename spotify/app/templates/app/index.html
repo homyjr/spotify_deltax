@@ -28,7 +28,7 @@
                         <span class="topsongs">top 10 songs</span>
                     </div>
                     <div class="column add ml-auto">
-                        <button type="button" class="btn btn-dark" onclick="$('.overlay').show();">+ Add Song</button>
+                        <a href="{% url 'createsong' %}" class="btn btn-dark">+ Add Song</a>
                     </div>
                 </div>
             </div>
@@ -97,14 +97,5 @@
 
 
 {% block scripts %}
-     <script src="{% static 'app/js/main.js' %}"></script> 
-     <script>
-        $('.overlay').on('click', function(e) {
-            if (e.target !== this) {
-            return;
-        }
-        $('.overlay').hide();
-        });
-     </script>
-     
+    <script src="{% static 'app/js/main.js' %}"></script> 
 {% endblock %}

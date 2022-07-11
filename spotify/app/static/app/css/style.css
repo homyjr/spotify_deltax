@@ -52,3 +52,7 @@
   background-color: white; /* background color */
   border-radius: 5px;
 }
+
+.form-select{
+  width: 200px;
+}
