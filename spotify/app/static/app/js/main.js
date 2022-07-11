@@ -31,9 +31,15 @@ $(document).ready(function(){
                   i +
                   `></span> `;
               }
+               
             }
-            $("#" + parent_id).html(content);          
+             $("#" + parent_id).html(content);        
           },
+          error: function(response) 
+          { 
+                alert("please login to rate"); 
+          }
+          
         });
 
 

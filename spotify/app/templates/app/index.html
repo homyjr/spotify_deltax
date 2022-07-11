@@ -1,9 +1,5 @@
 {% extends 'app/base.html' %}
 {% load static %}
-{% block navbar %}
-    {% include "app/navbar.html" %}
-{% endblock %}
-
 
 
 {% block content %}
@@ -44,8 +40,7 @@
                                 {% if song.image %}
                                 <img src="{{ song.image.url }}" alt="" width="120px" height="120px">
                                 {% endif %}
-                            </td>
-                            
+                            </td>                          
                             <td class="align-middle">
                                 {{song.title}}
                             </td>

@@ -3,7 +3,11 @@ from .models import Artist, Song
 # Create your views here.
 from django.http import JsonResponse
 from django.http import HttpResponse
-from app.forms import ArtistForm , SongForm
+from app.forms import ArtistForm , SongForm , CustomUserCreationForm
+from django.contrib.auth import authenticate, login, logout
+from django.http import request,Http404
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -16,13 +20,16 @@ def index(request):
 
 
 def rating(request, song_id, rate):
-
+    if request.user.is_authenticated:
        song = Song.objects.get(pk=song_id)
        song.rating  = int(rate)
        song.save()
        return JsonResponse({}, status=200)
+    else:
+        return JsonResponse({},status=400)
 
 
+@login_required(login_url='/login/')
 def add_song(request):
 
     if request.method == "POST":
@@ -42,7 +49,7 @@ def add_artist(request):
     if request.method == "POST":
         artist_form = ArtistForm(request.POST)
         if artist_form.is_valid():
-            print("yes")
+            
             k = artist_form.save()
             id = k.id
             name = k.name
@@ -50,3 +57,55 @@ def add_artist(request):
 
     return JsonResponse({}, status=400)
 
+def loginUser(request):
+    """ login form for user login """
+    try:
+        page = 'login'
+        if request.method == 'POST':
+            username = request.POST['username']
+            password = request.POST['password']
+
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect('index')
+                
+        return render(request, 'app/login_register.html', {'page': page})     
+    except Exception as e:
+        print(e)
+        raise Http404('Sorry some error occured')
+
+
+def logoutUser(request):
+    """ logout user """
+    try:
+        logout(request)
+        return redirect('index')
+
+    except Exception as e:
+        
+        raise Http404('Sorry some error occured')    
+
+def registerUser(request):
+    """ register form for new user """
+    try:
+        page = 'register'
+        form = CustomUserCreationForm()
+
+        if request.method == 'POST':
+            form = CustomUserCreationForm(request.POST)
+            if form.is_valid():
+                user = form.save(commit=False)
+                user.save()
+
+                if user is not None:
+                    login(request, user)
+                    return redirect('index')
+
+        context = {'form': form, 'page': page}
+        return render(request, 'app/login_register.html', context)    
+
+    except Exception as e:
+        
+        raise Http404('Sorry some error occured')            
