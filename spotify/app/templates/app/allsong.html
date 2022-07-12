@@ -4,29 +4,20 @@
 
 {% block content %}
 
-    
-
-<!-- song section -->
-<!-- song section -->
-<!-- song section -->
-
     <section class="songsection">
         <div class="container-m">
             <div class="heading my-4">
                 <div class="row">
                     <div class="column song">
-                        <span class="topsongs">top 10 songs</span>
-                    </div>
-                    <div class="column add ml-auto">
-                        <a href="{% url 'createsong' %}" class="btn btn-dark">+ Add Song</a>
+                        <span class="topsongs">all songs</span>
                     </div>
                 </div>
             </div>
             <div class="table-responsive">
                 <table class="table align-middle song_table">
                     <thead>
-                        <tr class="table-success">
-                             <th scope="col">Artwork</th>
+                        <tr class="table-primary">
+                            <th scope="col">Artwork</th>
                             <th scope="col">Song</th>
                             <th scope="col">Date of Release</th> 
                             <th scope="col">Artists</th> 
@@ -60,9 +51,9 @@
                                 <div class="stars" id="rate_{{song.pk}}" data-rate_id = "{{song.pk}}" data-url="{% url 'rating' song.pk '@' %}">
                                     {% for i in '12345'|make_list %}
                                         {% if forloop.counter <= song.rating %}
-                                        <span class="fa fa-star fa-lg checked rate" data-id="{{forloop.counter}}"></span>
+                                            <span class="fa fa-star fa-lg checked rate" data-id="{{forloop.counter}}"></span>
                                         {% else %}
-                                        <span class="fa fa-star fa-lg rate" data-id="{{forloop.counter}}""></span>
+                                            <span class="fa fa-star fa-lg rate" data-id="{{forloop.counter}}""></span>
                                         {% endif %}
                                     {% endfor %}
                                 </div>
@@ -71,63 +62,11 @@
                         {% endfor %}
                     </tbody>
                  </table>
-            </div>
-             
-        </div>
-       
+            </div>            
+        </div>   
     </section>
 
-<!-- artist section -->
-<!-- artist section -->
-<!-- artist section -->
-
-    <section class="artistsection my-2">
-        <div class="container-m">
-            <div class="heading my-4">
-                <div class="row">
-                    <div class="column artist">
-                        <span class="topartists">top 10 artists</span>
-                    </div>
-                </div>
-            </div>
-        
-         <div class="table-responsive">
-             <table class="table align-middle artist_table">
-                <thead>
-                    <tr class="table-danger">
-                        <th scope="col">Artist</th>
-                        <th scope="col">Date of birth</th>
-                        <th scope="col">Song</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for artist in song_artists %}
-                        <tr>                                               
-                            <td class="align-middle">
-                                {{artist.name}}
-                            </td>
-                            <td class="align-middle">
-                                {{artist.dateofbirth}}
-                            </td>
-                            <td class="align-middle">
-                                {% for song in artist.song_set.all %}
-                                    <span>{{song}}
-                                    {% if forloop.counter < artist.song_set.all|length %}    
-                                        <span>,</span>
-                                    {% endif %}
-                                    </span>
-                                {% endfor %}
-                            </td> 
-                    {% endfor %}      
-                </tbody> 
-                 </table> 
-            </div>
-        </div>
-
-
-    </section>
-   
-{% endblock %}
+    {% endblock %}
 
 
 {% block scripts %}

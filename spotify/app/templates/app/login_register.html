@@ -5,15 +5,14 @@
 
 <style>
     .login--wrapper {
-        display: flex;
+        display: block;
         align-items: center;
         height: 80vh;
         justify-content: center;
-    }
-
-    .form {
+        margin-top: 70px;
         width: 500px;
     }
+    
 </style>    
 
 {% endblock %}
@@ -43,12 +42,24 @@
         </form>
         {% else %}
         <form method='post'>
+            
             <h1>Register</h1>
             {% csrf_token %}
             {% for field in form %}
+
+            <div class="mb-3">
+                {% if field.errors %}
+                {% for error in field.errors %}
+                    {{ error }}
+                {% endfor %}
+                {% endif %}
+            </div>
+            
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">{{field.label}}</label>
                 {{field}}
+                
+                
             </div>
             {% endfor %}
             <button type="submit" class="btn btn-primary">Submit</button>

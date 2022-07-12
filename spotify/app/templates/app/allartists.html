@@ -1,0 +1,57 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<section class="artistsection my-2">
+        <div class="container-m">
+            <div class="heading my-4">
+                <div class="row">
+                    <div class="column artist">
+                        <span class="topartists">all artists</span>
+                    </div>
+                </div>
+            </div>
+        
+         <div class="table-responsive">
+             <table class="table align-middle artist_table">
+                <thead>
+                    <tr class="table-primary">
+                        <th scope="col">Artist</th>
+                        <th scope="col">Date of birth</th>
+                        <th scope="col">Song</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for artist in song_artists %}
+                        <tr>                                               
+                            <td class="align-middle">
+                                {{artist.name}}
+                            </td>
+                            <td class="align-middle">
+                                {{artist.dateofbirth}}
+                            </td>
+                            <td class="align-middle">
+                                {% for song in artist.song_set.all %}
+                                    <span>{{song}}
+                                    {% if forloop.counter < artist.song_set.all|length %}    
+                                        <span>,</span>
+                                    {% endif %}
+                                    </span>
+                                {% endfor %}
+                            </td> 
+                    {% endfor %}      
+                </tbody> 
+                 </table> 
+            </div>
+        </div>
+
+
+    </section>
+   
+{% endblock %}
+
+
+{% block scripts %}
+    <script src="{% static 'app/js/main.js' %}"></script> 
+{% endblock %}

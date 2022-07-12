@@ -1,46 +1,58 @@
 {% extends 'app/base.html' %} 
 {% load static %}
 
+{% block static_block %}
+
+{% endblock %}
+
+
 {% block content %}
 <section class="AddSongAndArtist">
 
   <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" id="modelbutton">
-  Launch demo modal
-</button>
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="exampleModalLabel">Add Artist</h5>
+        
       </div>
       
         <form action="" id="artistform" data-url = "{% url 'createartist' %}">
         <div class="modal-body">
 
             <div class="form-outline mb-4">
-                <label class="form-label" for="name_id">name</label>
-                <input type="text" id="name_id" required name="name">
+                <label class="form-label" for="name_id" style="font-weight: bolder;">name :</label>
+                <div>
+                        <input type="text" id="name_id" required name="name" placeholder="name">
+                </div>
+                
            </div>
 
 
             <div class="form-outline mb-4">
-                <label class="form-label" for="dateofbirth_id">Date of birth</label>
-                <input type="date" id="dateofbirth_id" name="dateofbirth">  
+                <label class="form-label" for="dateofbirth_id" style="font-weight: bolder;">Date of birth :</label>
+                <div>
+                    <input type="date" id="dateofbirth_id" name="dateofbirth">
+                </div>
+                  
            </div>
 
 
            <div class="form-outline mb-4">
-                <label class="form-label" for="bio_id">title</label>
-                <textarea id="bio_id" name="bio"  rows="4" cols="50"></textarea>
+                <label class="form-label" for="bio_id" style="font-weight: bolder;">bio :</label>
+                <div>
+                    <textarea id="bio_id" name="bio"  rows="4" cols="50"></textarea>
+                </div>
+                
            </div>
            </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
                 <input id = "savebutton" type="submit" class="btn btn-secondary" value="Save">
             </div>
 
@@ -55,43 +67,59 @@
 
 
 
-  <div class="container">
+  <div class="container-sm songcontainer">
+    
+    <div class="addsongheading">
+        <span class="addsongs">Add Song</span>
+    </div>
+
+    <div class="artistformcontainer">
+
+    
+       
     <form action="" method="POST" id="songform" enctype='multipart/form-data' data-url="{% url 'createsong' %}">
       {% csrf_token %}
-      
-        <div class="form-outline mb-4">
-            {{form.artists}}
-            <label class="form-label" for="formartist">artist</label>
-        </div>
-        <input type="button" value="add" onclick="$('.overlay').show();">
-        <button onclick="$('.overlay').show();">hi</button>
+
+        <div class="form-inline">
+            <label class="form-label" for="formtitle" style="font-weight: bolder;">Artist :</label>
+            <div class="form-group mx-sm-5 mb-2">
+                {{form.artists}}
+            </div>
+            <button type="button" class="btn btn-primary" id="modelbutton">+ Add Artist</button>
+            </div>
+
         <!-- Password input -->
-        <div class="form-outline mb-4">
+        <div class="form-outline mb-4 "style="margin-right:500px ;">
+            <label class="form-label" for="formtitle" style="font-weight: bolder;">title :</label>
             {{form.title}}
-            <label class="form-label" for="formtitle">title</label>
+            
         </div>
 
-        
         <!-- 2 column grid layout for inline styling -->
         
         <div class="form-outline mb-4">
-            {{form.date}}
-            <label class="form-label" for="formdate">date</label>
+            <label class="form-label" for="formdate" style="font-weight: bolder;">date :</label>
+            <div>
+                {{form.date}}
+            </div>
         </div>
             
         <div class="form-outline mb-4">
-            {{form.image}}
-            <label class="form-label" for="formimage">image</label>
+            <label class="form-label" for="formimage" style="font-weight: bolder;">image:</label>
+            <div>
+                {{form.image}}  
+            </div>   
         </div>
 
 
   <!-- Submit button -->
-  <button type="button" class="btn btn-primary">Sign in</button>
+  <a href="{% url 'index' %}" class="btn btn-primary" style="margin-right: 20px;">cancel</a>
+  
   <input class="btn btn-primary" type="submit" value="Save" />
   </div>
 
     </form>
-  
+  </div>
 </section>
 {% endblock %}
  {% block scripts %}

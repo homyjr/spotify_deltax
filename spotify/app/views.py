@@ -12,11 +12,23 @@ from django.contrib.auth.decorators import login_required
 
 
 def index(request):
-    songs= Song.objects.all()
-    # songs = sorted(song_unsorted, key= lambda x: x.artist_avg, reverse=True)
-    context = {'songs': songs}
-
+    songs= Song.objects.all()[:10]
+    artists_unsorted = Artist.objects.all()
+    song_artists = sorted(artists_unsorted, key= lambda x: x.artist_avg, reverse=True)[:10]
+    context = {'songs': songs, 'song_artists': song_artists}
     return render(request, 'app/index.html', context)
+
+
+def allsongs(request):
+    songs= Song.objects.all()
+    context = {'songs': songs}
+    return render(request, 'app/allsong.html', context)
+
+
+def allartists(request):
+    song_artists = Artist.objects.all()
+    context = {'song_artists': song_artists}
+    return render(request, 'app/allartists.html', context)
 
 
 def rating(request, song_id, rate):
