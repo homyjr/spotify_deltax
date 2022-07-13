@@ -21,19 +21,10 @@ Basic web app with CRUD operations using django
 
 * download the project in a folder of your choice
 
-* activate virtual environment in cmd
-
-```bash
-python -m venv myproject
-
-venv\Scripts\activate.bat
-
-```
-
 * change the directory
 
 ```bash
-cd spotify
+cd spotify_deltax/spotify
 ```
 
 * install the requirements
