@@ -12,6 +12,10 @@ Basic web app with CRUD operations using django
 # To run the project using docker image
 
     docker run -p 8000:8000 homydocker/spotify_deltax:v1
+
+ * open the web app in browser
+
+    http://127.0.0.1:8000/   
     
 # Manual installation
 
