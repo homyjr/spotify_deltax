@@ -1,0 +1,10 @@
+version: '3'
+services:
+  python_django:
+    build:
+      context: .
+    volumes:
+      - ./spotify:/app
+    ports:
+      - 8000:8000
+    
