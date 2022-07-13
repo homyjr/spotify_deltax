@@ -6,8 +6,8 @@ from django.db.models import Sum, Avg
 
 class Artist(models.Model):
     name = models.CharField(max_length=255)
-    dateofbirth = models.DateField(blank = True, null=True)
-    bio = models.TextField(max_length=1000, blank=True, null=True)
+    dateofbirth = models.DateField(null=True)
+    bio = models.TextField(max_length=1000, null=True)
 
     def __str__(self):
         return self.name
@@ -26,7 +26,7 @@ class Song(models.Model):
     artists = models.ManyToManyField(Artist)
     image = models.ImageField(null=True, blank=True)
     title = models.CharField(max_length=255)
-    date = models.DateField(blank = True, null=True)
+    date = models.DateField(null=True)
     rating = models.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(5)], default=0)
 
     def __str__(self):

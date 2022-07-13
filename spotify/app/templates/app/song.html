@@ -152,7 +152,7 @@ $(document).ready(function () {
       data: formData,
 
       success: function (data) {
-        console.log("success"); // ... do something with the data...
+        window.location = "{% url 'index' %}";// ... do something with the data...
       },
       cache: false,
       contentType: false,
